@@ -1,0 +1,138 @@
+<script id="institute-create-form" type="text/template">
+
+    <h3>ADD NEW {{name}}</h3>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label for="inputCity" class="col-form-label">Name of institute</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="inputCity" class="col-form-label">Mobile</label>
+            <input type="text" class="form-control" id="mobile" name="mobile">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputState" class="col-form-label">E-mail</label>
+            <input type="text" class="form-control" id="email" name="email">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="inputCity" class="col-form-label">City/Region</label>
+            <select id="inputState" class="form-control" id="region_id" name="region_id" onchange='Javascript: getWilaya(this.value);'>
+                <option value="">City/Region</option>
+                <?php
+                    if(isset($rejion)){
+                        foreach ($rejion as $mkoa) {
+                            ?>
+                            <option value="<?php echo (isset($mkoa->id))? $mkoa->id : ''; ?>"><?php echo (isset($mkoa->names))? $mkoa->names : ''; ?></option>
+                            <?php
+                        }
+                    }
+                ?>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputState" class="col-form-label">District</label>
+            <select id="inputState" class="form-control" id="district" name="district">
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="inputCity" class="col-form-label">Select Ward</label>
+            <select id="inputState" class="form-control" id="ward" name="ward">
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputState" class="col-form-label">Street Location</label>
+            <input type="text" class="form-control" id="location" name="location">
+        </div>
+    </div>
+
+    <hr class="afx">
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="inputCity" class="col-form-label">Latitude</label>
+            <input type="text" class="form-control" id="lat" name="lat">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputState" class="col-form-label">Longtude</label>
+            <input type="text" class="form-control" id="lon" name="lon">
+        </div>
+    </div>
+
+    <div class="row" id="showresponce">
+        <div class="form-group col-md-12">
+
+            <input type="hidden" class="form-control" id="user_id" name="user_id">
+            <input type="hidden" class="form-control" id="type_id" name="type_id" value="{{type_id}}">
+
+            <button type="button" class="btn btn-outline-primary btn-lg" onclick='createInstitute("#institute_forms", "#jx-loading", "#showresponce");' style="font-size: 28px; margin-top: 0.9rem;">
+                <span class="bv bmc"></span>
+                <span>SAVE</span>
+                <img src="./themes/assets/images/load.gif" id="jx-loading" style="visibility: hidden;" />
+            </button>
+            <button type="button" class="btn btn-outline-danger btn-lg" onclick='loadTemp("#start-create-form", "#create-form-institute", "CREATE NEW", 2);' style="font-size: 28px; margin-top: 0.9rem;">
+                CLOSE
+            </button>
+        </div>
+    </div>
+
+</script>
+<script id="start-create-form" type="text/template">
+
+    <div class="row">
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Hospital</h4>
+                    <p class="card-text" style="text-align: justify;">
+                        To add a new Hospital just click the button bellow
+                    </p>
+                    <a href="Javascript: void(0);" class="btn btn-outline-primary" onclick='loadTemp("#institute-create-form", "#create-form-institute", "HOSPITAL", 2);'>
+                        Add Hospital
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Brokers</h4>
+                    <p class="card-text" style="text-align: justify;">
+                        To add a new Broker just click the button bellow
+                    </p>
+                    <a href="Javascript: void(0);" class="btn btn-outline-primary" onclick='loadTemp("#institute-create-form", "#create-form-institute", "BROKER", 1);'>
+                        Add Broker
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Agents</h4>
+                    <p class="card-text" style="text-align: justify;">
+                        To add a new Agents just click the button bellow
+                    </p>
+                    <a href="Javascript: void(0);" class="btn btn-outline-primary" onclick='loadTemp("#institute-create-form", "#create-form-institute", "AGENT", 3);'>
+                        Add Agent
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</script>
+<script id="tmp-select-location" type="text/template">
+    <option value="0">Select District</option>
+    {{#response}}
+    <option value="{{id}}">{{names}}</option>
+    {{/response}}
+</script>
